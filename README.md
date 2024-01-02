@@ -1,4 +1,3 @@
-Certainly! Below is a basic template for a GitHub README for the brick game you just created. Feel free to customize it further based on your preferences:
 
 ```markdown
 # Brick Game
