@@ -1,0 +1,67 @@
+# Importing the required libraries
+import tkinter as tk
+import random
+
+# Creating the game window
+window = tk.Tk()
+window.title("Brick Breaker Game")
+window.geometry("500x500")
+
+# Creating the canvas
+canvas = tk.Canvas(window, width=500, height=500, bg="black")
+canvas.pack()
+
+# Creating the paddle
+paddle = canvas.create_rectangle(200, 480, 300, 490, fill="white")
+
+# Creating the ball
+ball = canvas.create_oval(240, 250, 260, 270, fill="white")
+
+# Setting the ball's initial speed
+ball_speed_x = 3
+ball_speed_y = -3
+
+# Creating the bricks
+bricks = []
+for i in range(0, 500, 50):
+    for j in range(0, 200, 50):
+        brick = canvas.create_rectangle(i, j, i+50, j+20, fill="white")
+        bricks.append(brick)
+
+# Function to move the paddle
+def move_paddle(event):
+    if event.keysym == "Left":
+        canvas.move(paddle, -20, 0)
+    elif event.keysym == "Right":
+        canvas.move(paddle, 20, 0)
+
+# Binding the paddle movement to the arrow keys
+canvas.bind_all("<KeyPress-Left>", move_paddle)
+canvas.bind_all("<KeyPress-Right>", move_paddle)
+
+# Function to move the ball
+def move_ball():
+    global ball_speed_x, ball_speed_y
+    canvas.move(ball, ball_speed_x, ball_speed_y)
+    ball_pos = canvas.coords(ball)
+    if ball_pos[0] <= 0 or ball_pos[2] >= 500:
+        ball_speed_x = -ball_speed_x
+    if ball_pos[1] <= 0:
+        ball_speed_y = -ball_speed_y
+    if ball_pos[3] >= 500:
+        canvas.create_text(250, 250, text="Game Over!", fill="white", font=("Arial", 24))
+        window.after_cancel(ball_move)
+    if ball_pos[3] >= 470 and ball_pos[2] >= canvas.coords(paddle)[0] and ball_pos[0] <= canvas.coords(paddle)[2]:
+        ball_speed_y = -ball_speed_y
+    for brick in bricks:
+        brick_pos = canvas.coords(brick)
+        if ball_pos[3] >= brick_pos[1] and ball_pos[1] <= brick_pos[3] and ball_pos[2] >= brick_pos[0] and ball_pos[0] <= brick_pos[2]:
+            canvas.delete(brick)
+            bricks.remove(brick)
+            ball_speed_y = -ball_speed_y
+            break
+    ball_move = window.after(10, move_ball)
+
+# Starting the game
+move_ball()
+window.mainloop()
