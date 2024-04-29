@@ -1,6 +1,7 @@
 
 ```markdown
 # Brick Game
+![image](https://github.com/olimiemma/BrickGame/assets/98601170/e06320b8-e8cb-426b-a9ef-28d2cac6b4e0)
 
 A simple brick game implemented in Python using the Pygame library.
 
