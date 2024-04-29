@@ -1,4 +1,5 @@
 The below Readme was created by AI, in theme with the whole point of this, watch video up there to understand what am talking about..
+![image](https://github.com/olimiemma/BrickGame/assets/98601170/1521376d-cc8a-4fca-9e77-5bb6e454d9dc)
 
 
 ```markdown
