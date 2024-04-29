@@ -1,3 +1,5 @@
+The below Readme was created by AI, in theme with the whole point of this, watch video up there to understand what am talking about..
+
 
 ```markdown
 # Brick Game
